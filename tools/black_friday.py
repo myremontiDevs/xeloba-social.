@@ -18,6 +18,7 @@ tiers = [  # name, colour, text colour, new, old, days, extra
     ("DIAMOND",  (111, 208, 240), DARK, "480",  "1200", "30 დღე", "+ ვიდეორგოლი, ბანერი"),
 ]
 
+LAST_DAY = len(sys.argv) > 3 and sys.argv[3] == "last-day"
 img = Image.new("RGB", (W, H), BG)
 d = ImageDraw.Draw(img)
 d.ellipse([W - 300, -200, W + 200, 300], fill=(42, 26, 18))
@@ -61,7 +62,13 @@ for name, col, tcol, new, old, days, extra in tiers:
     y += row_h
 
 # footer
-d.text((70, y + 8), "აქცია 30 ნოემბრამდე!", font=f(40), fill=ORANGE)
+d.text((70, y + 8), "აქცია დღეს მთავრდება!" if LAST_DAY else "აქცია 30 ნოემბრამდე!", font=f(40), fill=ORANGE)
+if LAST_DAY:
+    t = "ბოლო დღე!"
+    tf = f(44)
+    tw = d.textlength(t, font=tf) + 50
+    d.rounded_rectangle([W - 70 - tw, 72, W - 70, 136], radius=32, fill=RED)
+    d.text((W - 70 - tw + 25, 80), t, font=tf, fill=WHITE)
 cta = "xeloba.ge/vipmanager"
 cf = f(46)
 cw = d.textlength(cta, font=cf) + 80
