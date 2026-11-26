@@ -14,6 +14,13 @@
    "facebook_post_id": "210126072182800_122276754314168273",
    "media": "posts/2026-11-26-black-friday.jpg",
    "format": "photo"
+  },
+  {
+   "id": "extra-black-friday-last-day",
+   "date": "2026-11-30",
+   "note": "Black Friday last-day reminder, scheduled on Facebook for 10:00 Tbilisi (photo id 122276754728168273)",
+   "media": "posts/2026-11-30-black-friday-last-day.jpg",
+   "format": "photo"
   }
  ]
 }
