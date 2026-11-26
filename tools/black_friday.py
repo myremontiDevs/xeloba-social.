@@ -53,9 +53,9 @@ for name, col, tcol, new, old, days, extra in tiers:
     lw = d.textlength("ლარი", font=lf)
     nw, ow = d.textlength(new_t, font=nf), d.textlength(old_t, font=of)
     rx = W - 100
-    d.text((rx - lw, y + 48), "ლარი", font=lf, fill=WHITE)
-    d.text((rx - lw - 12 - nw, y + 14), new_t, font=nf, fill=WHITE)
-    ox, oy = rx - ow, y + 76
+    d.text((rx - lw, y + 60), "ლარი", font=lf, fill=WHITE)
+    d.text((rx - lw - 12 - nw, y + 26), new_t, font=nf, fill=WHITE)
+    ox, oy = rx - lw - 12 - nw - 28 - ow, y + 58
     d.text((ox, oy), old_t, font=of, fill=GREY)
     d.line([(ox - 2, oy + 19), (ox + ow + 2, oy + 19)], fill=RED, width=3)
     y += row_h
