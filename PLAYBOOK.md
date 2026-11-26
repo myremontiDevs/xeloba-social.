@@ -10,7 +10,7 @@ Strategy doc: https://claude.ai/artifact/RPAV8j795Rsq8n967DWEr2
 | Path | What it is |
 | --- | --- |
 | `calendar.json` | 30 posts, one every 3 days, 2026-11-26 → 2027-02-21. Fields: id, date (Tbilisi), pillar, topic, format (`photo` / `reel` / `text`), cta, cta_url |
-| `posted.json` | Log of what was already published. Never post an id that is in here. |
+| `posted.json` | Log of what was already published. Never post an id that is in here. Entries with a non-numeric id are extra posts the owner asked for. |
 | `tools/render.py` | Renders a photo card (1080×1350 JPG) or a Reel (1080×1920 MP4 + cover) from a JSON spec. Read its docstring. |
 | `assets/chanchika.png` | ჭანჭიკა, the mascot (transparent PNG). Always use this image, never draw a new one. |
 | `posts/` | Published media. Public URL: `https://raw.githubusercontent.com/myremontiDevs/xeloba-social./main/<path>` |
@@ -23,7 +23,8 @@ Strategy doc: https://claude.ai/artifact/RPAV8j795Rsq8n967DWEr2
    `text` posts get no image. For `photo`/`reel` posts, render, then **look at the image**
    (for a reel, extract 3–4 frames with ffmpeg) and fix any overflow, overlap or broken text before going on.
 3. Save media as `posts/<date>-<id>.jpg` / `.mp4` (+ `-cover.jpg`), commit, push to `main`.
-   Check the raw URL answers HTTP 200 (raw.githubusercontent can lag ~1 min; retry a few times).
+   Use the **commit-pinned** raw URL (`.../xeloba-social./<full commit sha>/posts/...`), not `main`:
+   the `main` URL is cached ~5 minutes and can serve an older file. Check it answers HTTP 200.
 4. Publish with Windsor `execute_action` (connector `facebook_organic`, account `210126072182800`):
    - `photo` → `create_photo_post` with `image_url` + `caption`, `scheduled_publish_time` = today 19:30 Tbilisi (= 15:30Z).
      If that is less than 11 minutes away, omit it (publish now).

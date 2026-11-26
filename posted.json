@@ -6,6 +6,14 @@
    "note": "manual launch post (offer system)",
    "facebook_post_id": "210126072182800_122276711888168273",
    "media": "posts/2026-11-26-xeloba-offer.jpg"
+  },
+  {
+   "id": "extra-black-friday",
+   "date": "2026-11-26",
+   "note": "Black Friday VIP sale (-60%), owner request",
+   "facebook_post_id": "210126072182800_122276754314168273",
+   "media": "posts/2026-11-26-black-friday.jpg",
+   "format": "photo"
   }
  ]
 }
