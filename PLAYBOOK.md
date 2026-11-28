@@ -9,7 +9,7 @@ Strategy doc: https://claude.ai/artifact/RPAV8j795Rsq8n967DWEr2
 
 | Path | What it is |
 | --- | --- |
-| `calendar.json` | 30 posts, one every 3 days, 2026-11-26 → 2027-02-21. Fields: id, date (Tbilisi), pillar, topic, format (`photo` / `reel` / `text`), cta, cta_url |
+| `calendar.json` | Posts by date (Tbilisi). **29.11–28.12.2026: one post every day** (ids 2–11 + 31–50); after that one every 3 days until 2027-02-21. Fields: id, date, pillar, topic, format (`photo` / `reel` / `text`), cta, cta_url, optional `notes` (key points to use — follow them) |
 | `posted.json` | Log of what was already published. Never post an id that is in here. Entries with a non-numeric id are extra posts the owner asked for. |
 | `tools/render.py` | Renders a photo card (1080×1350 JPG) or a Reel (1080×1920 MP4 + cover) from a JSON spec. Read its docstring. |
 | `assets/chanchika.png` | ჭანჭიკა, the mascot (transparent PNG). Always use this image, never draw a new one. |
@@ -31,7 +31,16 @@ Strategy doc: https://claude.ai/artifact/RPAV8j795Rsq8n967DWEr2
    - `text` → `create_post` with `message` (+ `link` if cta_url), same scheduling rule.
    - `reel` → `create_reel` with `video_url` + `description` (Reels cannot be scheduled: publish now, ~17:30).
      If it fails, try `create_video_post`; if that fails too, post the cover with `create_photo_post`.
-5. Append `{id, date, facebook_post_id, media, format}` to `posted.json`, commit, push.
+4b. **Instagram** (owner asked for daily posts on Instagram too, from 2026-11-29): publish the same media with Windsor
+   `execute_action` (connector `instagram`, account `17841475649915168`):
+   - `photo` → `create_image_post` with `image_url` (the commit-pinned JPG URL) + `caption`.
+   - `reel` → `create_video_post` with `video_url` + `cover_url` (the `-cover.jpg`) + `caption`, `share_to_feed: true`.
+   - `text` posts have no image: render a `photo` card for them first, so Instagram gets an image too.
+   - Instagram caption = the Facebook text, but links are not clickable there: replace the link line with
+     „👉 ბმული პროფილში“ and use up to 5 hashtags (e.g. `#ხელოსანი #რემონტი #xeloba #ხელოსნები #თბილისი`).
+   - Instagram cannot schedule: publish right away. If it fails, retry once; if it fails again, note it in posted.json
+     and go on — the Facebook post still counts.
+5. Append `{id, date, facebook_post_id, instagram_media_id, media, format}` to `posted.json`, commit, push.
 6. After id 30 is published, send the owner a short push message: the 30-post plan is finished.
 
 If something fails that the fallbacks cannot fix, do not retry endlessly: send the owner one
@@ -62,3 +71,5 @@ short Georgian push message saying which post failed and why.
  "mascot": true, "bubble": "optional short line", "cta": "xeloba.ge"}
 ```
 Items: max 5, each ≤ 40 characters. Reels: 3 items is ideal; `cta` is the end-card button text.
+With 4 or more items, leave out `bubble` — the speech bubble then overlaps the last item.
+Question/engagement cards: put the options as items with `item_style: "none"` and ask for answers in the caption.
