@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
+  <defs>
+    <linearGradient id="ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFB45C"/>
+      <stop offset="0.5" stop-color="#F08A3E"/>
+      <stop offset="1" stop-color="#D8612C"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5A5A62"/>
+      <stop offset="0.45" stop-color="#3A3A41"/>
+      <stop offset="1" stop-color="#202025"/>
+    </linearGradient>
+    <linearGradient id="grip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4A4A52"/>
+      <stop offset="0.5" stop-color="#2C2C32"/>
+      <stop offset="1" stop-color="#18181C"/>
+    </linearGradient>
+    <linearGradient id="shaft" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9A9AA3"/>
+      <stop offset="0.5" stop-color="#5E5E66"/>
+      <stop offset="1" stop-color="#34343A"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+  </defs>
+
+  <!-- ring -->
+  <g filter="url(#glow)">
+    <circle cx="500" cy="500" r="385" fill="none" stroke="url(#ring)" stroke-width="40"/>
+    <circle cx="500" cy="500" r="334" fill="none" stroke="url(#ring)" stroke-width="9" opacity="0.9"/>
+  </g>
+
+  <!-- PLIERS: drawn horizontally, jaws to the right, rotated so jaws point top-right -->
+  <g transform="rotate(-45 500 500)">
+    <!-- cut-out halo so the ring breaks around the tool -->
+    <g stroke="#111113" stroke-width="34" stroke-linejoin="round" fill="#111113">
+      <path d="M560 496 L880 492 L670 444 L540 460 Z"/>
+      <path d="M560 504 L880 508 L670 556 L540 540 Z"/>
+      <path d="M545 488 L150 430 L128 452 L140 470 L535 505 Z"/>
+      <path d="M545 512 L150 570 L128 548 L140 530 L535 495 Z"/>
+    </g>
+    <!-- handles (grip) -->
+    <g stroke="#F08A3E" stroke-width="5" stroke-linejoin="round">
+      <path d="M548 486 L420 470 L150 428 Q122 432 126 456 Q130 474 150 476 L420 492 L540 506 Z" fill="url(#grip)"/>
+      <path d="M548 514 L420 530 L150 572 Q122 568 126 544 Q130 526 150 524 L420 508 L540 494 Z" fill="url(#grip)"/>
+    </g>
+    <!-- grip highlight -->
+    <path d="M410 474 L160 438" stroke="#F6A35A" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <path d="M410 526 L160 562" stroke="#F6A35A" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- jaws -->
+    <g stroke="#F08A3E" stroke-width="5" stroke-linejoin="round" fill="url(#metal)">
+      <path d="M535 462 Q600 432 675 446 L862 486 Q882 493 864 498 L640 496 L560 506 Z"/>
+      <path d="M535 538 Q600 568 675 554 L862 514 Q882 507 864 502 L640 504 L560 494 Z"/>
+    </g>
+    <!-- jaw serrations -->
+    <g stroke="#1A1A1E" stroke-width="3" opacity="0.8">
+      <line x1="700" y1="494" x2="700" y2="506"/><line x1="730" y1="494" x2="730" y2="506"/>
+      <line x1="760" y1="495" x2="760" y2="505"/><line x1="790" y1="496" x2="790" y2="504"/>
+    </g>
+    <!-- pivot -->
+    <circle cx="560" cy="500" r="40" fill="url(#metal)" stroke="#F08A3E" stroke-width="5"/>
+    <circle cx="560" cy="500" r="13" fill="#17171B" stroke="#F6A35A" stroke-width="3"/>
+  </g>
+
+  <!-- SCREWDRIVER: drawn horizontally, tip to the left, rotated so tip points top-left -->
+  <g transform="rotate(45 500 500)">
+    <g stroke="#111113" stroke-width="30" stroke-linejoin="round" fill="#111113">
+      <rect x="105" y="486" width="380" height="28"/>
+      <rect x="470" y="440" width="425" height="120" rx="52"/>
+    </g>
+    <!-- shaft -->
+    <path d="M118 490 L470 488 L470 512 L118 510 L100 506 L100 494 Z" fill="url(#shaft)" stroke="#F08A3E" stroke-width="4" stroke-linejoin="round"/>
+    <!-- bolster -->
+    <rect x="455" y="468" width="45" height="64" rx="10" fill="url(#metal)" stroke="#F08A3E" stroke-width="5"/>
+    <!-- handle -->
+    <rect x="492" y="448" width="395" height="104" rx="48" fill="url(#grip)" stroke="#F08A3E" stroke-width="6"/>
+    <!-- grip grooves -->
+    <g fill="#E8743B">
+      <rect x="560" y="462" width="230" height="12" rx="6" opacity="0.95"/>
+      <rect x="560" y="494" width="250" height="12" rx="6" opacity="0.75"/>
+      <rect x="560" y="526" width="230" height="12" rx="6" opacity="0.55"/>
+    </g>
+    <!-- handle highlight -->
+    <path d="M520 462 Q700 452 860 466" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.18"/>
+  </g>
+</svg>
