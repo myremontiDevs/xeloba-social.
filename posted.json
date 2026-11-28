@@ -30,6 +30,15 @@
    "note": "scheduled on Facebook for 19:30 Tbilisi (15:30Z); post id not returned by list_scheduled_posts",
    "media": "posts/2026-11-26-1.jpg",
    "format": "photo"
+  },
+  {
+   "id": "extra-chanchika-offers-reel",
+   "date": "2026-11-28",
+   "note": "Chanchika offer-system video (v3) from owner, published as Reel; owner plans $3/day ad on it",
+   "facebook_post_id": "210126072182800_122277030752168273",
+   "facebook_video_id": "2088196185233957",
+   "media": "posts/2026-11-28-chanchika-offers.mp4",
+   "format": "reel"
   }
  ]
 }
